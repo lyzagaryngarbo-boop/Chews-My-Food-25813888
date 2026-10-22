@@ -1,0 +1,75 @@
+import random
+from ._anvil_designer import Form1Template
+from anvil import *
+#imports Anvil Form 1 Design Template
+
+class Form1(Form1Template):
+#"class" defines blueprint by utilising the Anvil Form 1 Design Template
+  def __init__(self, **properties):
+    super().__init__(**properties)
+    #"def" defines Anvil From 1 Design Template function
+    
+    self.title.text = "Chews My Food" 
+    #changes title text to "Chews My Food"
+  
+  @handle("button_1", "click")
+  def button_1_click(self, **event_args): 
+  #"def" defines function for button_1 for when clicked by the user 
+    pass
+    #code from this point onwards runs when button_1 is clicked by the user
+    
+    self.cuisine.visible = False
+    self.button_2.visible = False
+    self.dish.visible = False
+    #makes cuisine text, button 2, and dish text not visible by making their visibility variable false
+    
+    my_cuisinelist = ['Filipino', 'Chinese', 'Australian', 'French']
+    #creates a list variable named "my_cuisinelist"
+    
+    single_cuisine = random.choice(my_cuisinelist)
+    #variable single_cuisine randomly picks a choice from variable "my_cuisinelist"'s list
+
+    self.selected_cuisine = single_cuisine
+    #defines single_cuisine as self.selected_cuisine needed for button_2 code below
+
+    self.cuisine.text = single_cuisine
+    #makes cuisine text result as the random choice result from single_cuisine
+    
+    print(self.cuisine.text)
+    #prints cuisine text
+
+    self.cuisine.align = "center"
+    #aligns cuisine text to center
+    
+    self.cuisine.visible = True
+    #makes cuisine text visible
+
+    self.button_1.enabled = False
+    #disables button_1 from being clicked again
+    self.button_2.visible = True
+    #makes button_2 visible
+
+  @handle("button_2", "click")
+  def button_2_click(self, **event_args): 
+  #"def" defines function for button_2 for when clicked by the user 
+    pass 
+     #code from this point onwards runs when button_2 is clicked by the user
+  
+    menu = {
+      'Filipino': ['Adobo', 'Sinigang', 'Lechon', 'Pancit'],
+      'Chinese': ['Dim Sum', 'Xiao Long Bao', 'Fried Rice', 'Peking Duck'],
+      'Australian': ['Meat Pie', 'Vegemite Toast', 'Chicken Parmigiana', 'Lamington'],
+      'French': ['Croissant', 'Coq au Vin', 'Ratatouille', 'Crème Brûlée']
+    }
+    #creates dishes list under cuisine list
+    
+    available_dishes = menu[self.selected_cuisine]
+    #makes variable available_dishes  
+    random_dish = random.choice(available_dishes)
+    self.dish.text = random_dish
+    self.dish.align = "center"
+    print(random_dish) 
+    self.dish.visible = True
+    self.button_2.enabled = False
+    
+
