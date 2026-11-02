@@ -1,4 +1,5 @@
 import random
+#imports python's random module to allow random.choice() to function
 from ._anvil_designer import Form1Template
 from anvil import *
 #imports Anvil Form 1 Design Template
@@ -13,6 +14,7 @@ class Form1(Form1Template):
     #changes title text to "Chews My Food"
   
   @handle("button_1", "click")
+  #"@handle()" allows "button_1" to connect to event of a "click"
   def button_1_click(self, **event_args): 
   #"def" defines function for button_1 for when clicked by the user 
     pass
@@ -24,14 +26,14 @@ class Form1(Form1Template):
     #makes cuisine text, button 2, and dish text not visible by making their visibility variable false
     
     my_cuisinelist = ['Filipino', 'Chinese', 'Australian', 'French']
-    #creates a list variable named "my_cuisinelist"
-    
+    #creates a list variable named "my_cuisinelist". List itself stores the cuisine options available.
+
     single_cuisine = random.choice(my_cuisinelist)
-    #variable single_cuisine randomly picks a choice from variable "my_cuisinelist"'s list
+    #variable single_cuisine randomly picks a choice from variable "my_cuisinelist"'s list through the "random.choice()" function
 
     self.selected_cuisine = single_cuisine
-    #defines single_cuisine as self.selected_cuisine needed for button_2 code below
-
+    #defines single_cuisine as self.selected_cuisine needed for button_2 to access
+    
     self.cuisine.text = single_cuisine
     #makes cuisine text result as the random choice result from single_cuisine
     
@@ -39,7 +41,7 @@ class Form1(Form1Template):
     #prints cuisine text
 
     self.cuisine.align = "center"
-    #aligns cuisine text to center
+    #aligns cuisine text to centre
     
     self.cuisine.visible = True
     #makes cuisine text visible
@@ -50,6 +52,7 @@ class Form1(Form1Template):
     #makes button_2 visible
 
   @handle("button_2", "click")
+  #"@handle()" allows "button_2" to connect to event of a "click"
   def button_2_click(self, **event_args): 
   #"def" defines function for button_2 for when clicked by the user 
     pass 
@@ -61,15 +64,30 @@ class Form1(Form1Template):
       'Australian': ['Meat Pie', 'Vegemite Toast', 'Chicken Parmigiana', 'Lamington'],
       'French': ['Croissant', 'Coq au Vin', 'Ratatouille', 'Crème Brûlée']
     }
-    #creates dishes list under cuisine list
+    #creates dishes list under cuisine list by utilising dictionary data structure
     
     available_dishes = menu[self.selected_cuisine]
-    #makes variable available_dishes  
+    #retrieves the list of dishes (via from code line 35) in relation to the cuisine that was randomly selected earlier
+  
     random_dish = random.choice(available_dishes)
+    #Randomly picks a choice from the cuisine list dictionary through the "random.choice()" function
+   
     self.dish.text = random_dish
-    self.dish.align = "center"
-    print(random_dish) 
-    self.dish.visible = True
-    self.button_2.enabled = False
+    #makes dish text result as the random choice result from random_dish
     
+    self.dish.align = "center"
+    #aligns dish text to centre
+
+    print(random_dish) 
+    #prints dish text
+    
+    self.dish.visible = True
+    #makes the dish text visible
+    
+    self.button_2.enabled = False
+    #disables button 2 from being clicked again
+    
+    
+    
+
 
